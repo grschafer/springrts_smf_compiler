@@ -19,7 +19,13 @@ import textwrap
 import argparse
 import os
 
-from PyQt4 import QtCore, QtGui
+# Try for Qt5, fall back to Qt4, fail if neither.
+try:
+    from PyQt5 import QtCore, QtWidgets as QtGui
+    from PyQt5.QtGui import QIntValidator, QDoubleValidator
+except ImportError:
+    from PyQt4 import QtCore, QtGui
+    from PyQt4.QtGui import QIntValidator, QDoubleValidator
 
 __VERSION__ = "0.0.4"
 
@@ -308,9 +314,9 @@ class ArgparseUi(QtGui.QDialog):
         if not a.choices and a.nargs in [None, '1']:
             rawtypename = self.extractTypename(a)
             if rawtypename == 'int':
-                validator = QtGui.QIntValidator
+                validator = QIntValidator
             elif rawtypename == 'float':
-                validator = QtGui.QDoubleValidator
+                validator = QDoubleValidator
         return validator
 
     def disableOnClick(self, widget):
@@ -430,7 +436,7 @@ class ArgparseUi(QtGui.QDialog):
                 btn.include = include
 
                 def openAFile():
-                    filename = QtGui.QFileDialog.getOpenFileName()
+                    filename, _ = QtGui.QFileDialog.getOpenFileName()
                     if filename:
                         btn.lineedit.setText(filename)
                         btn.lineedit.setEnabled(True)

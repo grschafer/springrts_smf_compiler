@@ -1,0 +1,5 @@
+# argparseui is modified, so it was vendored and included in this repo
+Pillow
+pyinstaller
+pypng
+pyqt5
