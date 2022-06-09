@@ -676,7 +676,7 @@ class ArgparseUi(QtGui.QDialog):
         """
         handle DNTS button pressed
         """
-        filename = QtGui.QFileDialog.getOpenFileName() # has / as pathsep
+        filename, _ = QtGui.QFileDialog.getOpenFileName() # has / as pathsep
         if filename:
             filename = str(filename)
             outputfilename = filename.rpartition('/')[2].rpartition('.')[0]+'.dds'
@@ -717,7 +717,7 @@ class ArgparseUi(QtGui.QDialog):
         """
         handle load button pressed
         """
-        filename = QtGui.QFileDialog.getOpenFileName()
+        filename, _ = QtGui.QFileDialog.getOpenFileName()
         if filename:
           helper = argparse.ArgumentParser(add_help=False, parents=[self.parser], fromfile_prefix_chars='@')
           self.resetAllWidgets(helper)
